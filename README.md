@@ -27,7 +27,7 @@ This means that the input files must contain pre-processed **Dollar-C** code, wh
 
 ### Output Guarantees
 The **Dollar-C** compiler removes all template definitions and instantiates them where necessary, producing standard C output.
-It is possible to compile all translation units separately or as a unity build.
+It is possible to compile translation units separately or as a unity build.
 
 ## Language Mechanics
 ### Template System
@@ -100,8 +100,9 @@ void example()
 ```
 
 ### Pragmas
-Some advanced constructs require token concatenation and other forms of text manipulation that templates aren’t designed to achieve.
-To facilitate these use cases, the macro system can be used with the following pragmas:
+**Important: Only global pragmas are supported!**
+
+Macros can be defined with the following pragmas:
 ```c
 // define a macro with optional template parameters (no specialization allowed)
 #pragma DCC push <base name>[parameter list] [replacement]
@@ -109,7 +110,7 @@ To facilitate these use cases, the macro system can be used with the following p
 #pragma DCC pop <base name>
 ```
 
-A macro can be used by prepending `$` to its name (this works within other symbols as well). Some examples:
+Macros can be used by prepending `$` to their name (this works within other symbols as well). Some examples:
 ```c
 #pragma DCC push Concat$X$Y $X$Y
 #pragma DCC push Swap$X$Y $$Y$$X
